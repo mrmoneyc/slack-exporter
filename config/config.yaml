@@ -1,0 +1,11 @@
+---
+SlackToken:
+RequestDelay: 1200
+ChannelTypes:
+  # - "public_channel"
+  # - "private_channel"
+  # - "mpim"
+  # - "im"
+ExportBasePath: "./export"
+SplitMessages: false
+ArchiveData: true
