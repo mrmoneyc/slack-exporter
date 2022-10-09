@@ -34,12 +34,13 @@ func GetChannels(cfg *config.Config, client *slack.Client, users []slack.User) (
 
 		channels_raw = append(channels_raw, conversationList...)
 
+		time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
+
 		nextCursor = cursor
 		if nextCursor == "" {
 			break
 		}
 		log.Debugf("\tnext cursor: %s", nextCursor)
-		time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
 	}
 
 	log.Infof("total channels: %d", len(channels_raw))

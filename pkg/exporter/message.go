@@ -37,12 +37,13 @@ func GetMessages(cfg *config.Config, client *slack.Client, channelId string) ([]
 
 		messages = append(messages, conversationHistory.Messages...)
 
+		time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
+
 		nextCursor = conversationHistory.ResponseMetaData.NextCursor
 		if nextCursor == "" {
 			break
 		}
 		log.Debugf("\tnext cursor: %s", nextCursor)
-		time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
 	}
 
 	log.Infof("total messages: %d", len(messages))
@@ -71,12 +72,13 @@ func GetMessages(cfg *config.Config, client *slack.Client, channelId string) ([]
 					}
 				}
 
+				time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
+
 				nextThreadCursor = cursor
 				if nextThreadCursor == "" {
 					break
 				}
 				log.Debugf("\tnext cursor: %s", nextThreadCursor)
-				time.Sleep(time.Duration(cfg.RequestDelay) * time.Millisecond)
 			}
 
 		}
