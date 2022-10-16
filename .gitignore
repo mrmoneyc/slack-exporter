@@ -1,0 +1,50 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Ctags files
+tags
+TAGS
+
+# Application specific folders
+.vscode/
+.idea/
+tmp/
+
+# Application specific files
+.sync
+.env
+.remote-sync.json
+*.code-workspace
+*.session.vim
+_*.vim
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+
+# Temp file (obviously)
+*.tmp
