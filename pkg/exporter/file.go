@@ -35,6 +35,7 @@ func SaveFiles(cfg *config.Config, client *slack.Client, messages []slack.Messag
 				log.Errorf("%v", err)
 				continue
 			}
+			defer fWriter.Close()
 
 			if err := client.GetFile(f.URLPrivate, fWriter); err != nil {
 				log.Errorf("%v", err)
