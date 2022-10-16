@@ -9,3 +9,8 @@ ChannelTypes:
 ExportBasePath: "./export"
 SplitMessages: false
 ArchiveData: true
+IncludeChannel:
+  # - "general"
+  # - "random"
+  # - "@someone"
+  # - "mpdm-user1--user2--user3-1"

@@ -7,4 +7,5 @@ type Config struct {
 	ExportBasePath string
 	SplitMessages  bool
 	ArchiveData    bool
+	IncludeChannel []string
 }

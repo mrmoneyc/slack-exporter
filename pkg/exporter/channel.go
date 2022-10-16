@@ -11,6 +11,7 @@ import (
 	"github.com/mrmoneyc/slack-exporter/pkg/config"
 	log "github.com/sirupsen/logrus"
 	"github.com/slack-go/slack"
+	"golang.org/x/exp/slices"
 )
 
 func GetChannels(cfg *config.Config, client *slack.Client, users []slack.User) ([]slack.Channel, error) {
@@ -43,7 +44,7 @@ func GetChannels(cfg *config.Config, client *slack.Client, users []slack.User) (
 		log.Debugf("\tnext cursor: %s", nextCursor)
 	}
 
-	log.Infof("total channels: %d", len(channels_raw))
+	log.Infof("total channels (before filter): %d", len(channels_raw))
 
 	for _, x := range channels_raw {
 		if x.IsIM {
@@ -55,6 +56,12 @@ func GetChannels(cfg *config.Config, client *slack.Client, users []slack.User) (
 						x.Name = fmt.Sprintf("@%s", y.Name)
 					}
 				}
+			}
+		}
+
+		if len(cfg.IncludeChannel) > 0 {
+			if !slices.Contains(cfg.IncludeChannel, x.Name) {
+				continue
 			}
 		}
 
