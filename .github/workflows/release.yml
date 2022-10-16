@@ -35,7 +35,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Linux amd64
-        uses: actions/upload-release-assets@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -44,7 +44,7 @@ jobs:
           asset_name: slack-exporter-${{ steps.get_version.outputs.VERSION }}-linux-amd64.tar.gz
           asset_content_type: application/octet-stream
       - name: Upload Linux arm64
-        uses: actions/upload-release-assets@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -53,7 +53,7 @@ jobs:
           asset_name: slack-exporter-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz
           asset_content_type: application/octet-stream
       - name: Upload Darwin amd64
-        uses: actions/upload-release-assets@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -62,7 +62,7 @@ jobs:
           asset_name: slack-exporter-${{ steps.get_version.outputs.VERSION }}-darwin-amd64.tar.gz
           asset_content_type: application/octet-stream
       - name: Upload Darwin arm64
-        uses: actions/upload-release-assets@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -71,7 +71,7 @@ jobs:
           asset_name: slack-exporter-${{ steps.get_version.outputs.VERSION }}-darwin-arm64.tar.gz
           asset_content_type: application/octet-stream
       - name: Upload Windows amd64
-        uses: actions/upload-release-assets@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
