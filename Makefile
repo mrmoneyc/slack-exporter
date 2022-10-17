@@ -5,6 +5,8 @@ VERSION ?= $(shell git describe --tags --always --dirty --match=v* 2> /dev/null 
 			cat $(CURDIR)/.version 2> /dev/null || echo nightly)
 BIN_DIR = $(CURDIR)/bin
 DIST_DIR ?= $(CURDIR)/dist
+SCRIPT_DIR = $(CURDIR)/scripts
+WINDOWS_RUN = run.bat
 
 GO = go
 
@@ -52,7 +54,7 @@ dist-darwin: \
 	$(DIST_DIR)/$(VERSION)/$(BIN)-$(VERSION)-darwin-amd64.tar.gz
 
 dist-windows: \
-	$(DIST_DIR)/$(VERSION)/$(BIN)-$(VERSION)-windows-amd64.tar.gz
+	$(DIST_DIR)/$(VERSION)/$(BIN)-$(VERSION)-windows-amd64.zip
 
 ## Generate dist archive file
 dist: dist-linux dist-darwin dist-windows
@@ -68,14 +70,20 @@ $(DIST_DIR)/$(VERSION):
 $(DIST_DIR)/$(VERSION)/$(BIN)-$(VERSION)-%.tar.gz: build-% $(DIST_DIR)/$(VERSION)
 		tar -C $(BIN_DIR) -cvzf $@ $(BIN)-$*
 
+$(DIST_DIR)/$(VERSION)/$(BIN)-$(VERSION)-windows-%.zip: build-windows-% $(DIST_DIR)/$(VERSION)
+		cp $(SCRIPT_DIR)/$(WINDOWS_RUN) $(BIN_DIR)/$(WINDOWS_RUN)
+		cd $(BIN_DIR) && zip -r $@ $(BIN).exe $(WINDOWS_RUN)
+
 build-%: $(BIN_DIR) ; $(info $(M) Building $(BIN)-$*...)
 	$Q os=$$(echo $* | cut -d "-" -f 1); \
 	arch=$$(echo $* | cut -d "-" -f 2); \
 	if [ "$$os" != "$$arch" ]; then \
+		output=$(BIN_DIR)/$(BIN)-$*; \
+		[[ "$$os" == "windows" ]] && output=$(BIN_DIR)/$(BIN).exe; \
 		GOOS=$$os GOARCH=$$arch $(GO) build \
 			-tags release \
 			-ldflags '-X $(PACKAGE)/pkg/cmd.Version=$(VERSION) -X $(PACKAGE)/pkg/cmd.BuildDate=$(DATE)' \
-			-o $(BIN_DIR)/$(BIN)-$* cmd/slack-exporter/main.go; \
+			-o $$output cmd/slack-exporter/main.go; \
 	fi
 
 # Misc
