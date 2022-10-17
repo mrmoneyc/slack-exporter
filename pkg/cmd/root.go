@@ -104,8 +104,10 @@ func Run(cmd *cobra.Command, args []string) {
 			log.Errorf("%v", err)
 		}
 
-		if err := exporter.SaveFiles(cfg, slackClient, messages, c.Name, now); err != nil {
-			log.Errorf("%v", err)
+		if cfg.DownloadFiles {
+			if err := exporter.SaveFiles(cfg, slackClient, messages, c.Name, now); err != nil {
+				log.Errorf("%v", err)
+			}
 		}
 	}
 

@@ -9,6 +9,7 @@ ChannelTypes:
 ExportBasePath: "./export"
 SplitMessages: false
 ArchiveData: true
+DownloadFiles: true
 IncludeChannel:
   # - "general"
   # - "random"

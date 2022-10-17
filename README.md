@@ -31,6 +31,7 @@ ChannelTypes:
 ExportBasePath: "./export"
 SplitMessages: false
 ArchiveData: true
+DownloadFiles: true
 IncludeChannel:
   # - "general"
   # - "random"
@@ -48,6 +49,7 @@ List of configuration values
 | ExportBasePath | string       | Data export target path.                                     |
 | SplitMessages  | boolean      | Split message files by day if set to `true`.                 |
 | ArchiveData    | boolean      | Make archive file for exported data if set to `true`.        |
+| DownloadFiles  | boolean      | Download files in messages.                                  |
 | IncludeChannel | string array | Specify channels to export.                                  |
 
 ## Usage
@@ -57,6 +59,8 @@ To run exporter:
 ```sh
 slack-exporter
 ```
+
+Windows user can use `run.bat` to run exporter.
 
 If you want to switch to other configuration file, you can add `-c` or `--config` option:
 
